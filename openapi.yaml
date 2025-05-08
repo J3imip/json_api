@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: json_api
+  description: ''
+  license:
+    name: MIT
+    url: 'https://opensource.org/licenses/MIT'
+servers:
+  - url: 'https://6088.dev.m10.net/block-explorer'
+    description: Development server
+security: []
+paths:
+  /accounts:
+    parameters:
+      - in: query
+        name: 'page[number]'
+        required: false
+        schema:
+          type: integer
+        description: The number of a page to return.
+      - in: query
+        name: 'page[limit]'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 15
+          description: Numbers of items per page to return.
+      - in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+    get:
+      tags:
+        - Account
+      summary: Get account list
+      description: ''
+      operationId: getAccountList
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                allOf:
+                  - type: object
+                    properties:
+                      data:
+                        type: array
+                        items:
+                          allOf:
+                            - type: object
+                              required:
+                                - id
+                                - type
+                              properties:
+                                id:
+                                  type: string
+                                type:
+                                  type: string
+                                  enum:
+                                    - account
+                            - type: object
+                              required:
+                                - attributes
+                              properties:
+                                attributes:
+                                  type: object
+                                  required:
+                                    - address
+                                  properties:
+                                    address:
+                                      type: string
+                                      example: TVPPKvkxpM4GnRC49s67e6JTVvGx4NgJ8x
+                                      description: Tron address
+                  - type: object
+                    properties:
+                      meta:
+                        type: object
+                  - type: object
+                    properties:
+                      links:
+                        type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+  '/accounts/{id}':
+    parameters:
+      - in: query
+        name: 'page[number]'
+        required: false
+        schema:
+          type: integer
+        description: The number of a page to return.
+      - in: query
+        name: 'page[limit]'
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 15
+          description: Numbers of items per page to return.
+      - in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+      - in: path
+        name: id
+        required: true
+        description: The ID of the account to retrieve
+        schema:
+          type: string
+    get:
+      tags:
+        - Account
+      summary: Get account
+      description: ''
+      operationId: getAccount
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                allOf:
+                  - type: object
+                    properties:
+                      data:
+                        allOf:
+                          - type: object
+                            required:
+                              - id
+                              - type
+                            properties:
+                              id:
+                                type: string
+                              type:
+                                type: string
+                                enum:
+                                  - account
+                          - type: object
+                            required:
+                              - attributes
+                            properties:
+                              attributes:
+                                type: object
+                                required:
+                                  - address
+                                properties:
+                                  address:
+                                    type: string
+                                    example: TVPPKvkxpM4GnRC49s67e6JTVvGx4NgJ8x
+                                    description: Tron address
+                  - type: object
+                    properties:
+                      meta:
+                        type: object
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
