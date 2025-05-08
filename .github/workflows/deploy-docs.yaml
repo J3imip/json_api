@@ -33,9 +33,8 @@ jobs:
 
       - name: Copy docs to temp folder
         run: |
-          mkdir -p out/${{ github.ref_name }}
-          cp -r docs/dist/index.html out/${{ github.ref_name }}/
-          if [ -d docs/dist/assets ]; then cp -r docs/dist/assets out/${{ github.ref_name }}/; fi
+          mkdir -p out
+          cp -r docs/dist/* out/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
