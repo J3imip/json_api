@@ -27,6 +27,9 @@ jobs:
         working-directory: ./docs
         run: npm install
 
+      - name: Set branch name env
+        run: echo "BRANCH_NAME=${GITHUB_REF_NAME}" >> $GITHUB_ENV
+
       - name: Build docs
         working-directory: ./docs
         run: npm run build
