@@ -1,0 +1,17 @@
+type: object
+required:
+  - self
+properties:
+  self:
+    type: string
+    example: "/api/v2/item?page[number]=1&page[limit]=15"
+    description: Link to the current page
+  prev:
+    type: string
+    example: "/api/v2/item?page[number]=0&page[limit]=15"
+    description: Previous page link
+  next:
+    type: string
+    example: "/api/v2/item?page[number]=2&page[limit]=15"
+    description: Next page link
+

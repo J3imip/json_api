@@ -1,0 +1,15 @@
+{
+    "name": "docs",
+    "version": "1.0.0",
+    "main": "index.js",
+    "license": "MIT",
+    "scripts": {
+        "bundle": "swagger-cli bundle openapi.yaml -o ./dist/openapi.yaml -t yaml --dereference",
+        "lint": "redocly lint ./dist/openapi.yaml",
+        "build": "npm run bundle && npm run lint && redocly build-docs dist/openapi.yaml -o ./dist/index.html"
+    },
+    "dependencies": {
+        "swagger-cli": "^4.0.4",
+        "@redocly/cli": "^1.0.0"
+    }
+}

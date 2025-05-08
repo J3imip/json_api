@@ -1,0 +1,43 @@
+parameters:
+  - $ref: '../components/parameters/pageNumberParam.yaml'
+  - $ref: '../components/parameters/pageLimitParam.yaml'
+  - $ref: '../components/parameters/sortingParam.yaml'
+  - in: path
+    name: id
+    required: true
+    description: The ID of the account to retrieve
+    schema:
+      type: string
+get:
+  tags:
+    - Account
+  summary: Get account
+  description: ''
+  operationId: getAccount
+  responses:
+    '200':
+      description: Successful response
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            allOf:
+              - type: object
+                properties:
+                  data:
+                    $ref: '../components/schemas/Account.yaml'
+              - type: object
+                properties:
+                  meta:
+                    type: object
+    '400':
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string

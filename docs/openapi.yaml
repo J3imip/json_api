@@ -1,0 +1,17 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: json_api
+  description: ''
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: 'https://6088.dev.m10.net/block-explorer'
+    description: Development server
+security: []
+paths:
+  /accounts:
+    $ref: './paths/AccountList.yaml'
+  /accounts/{id}:
+    $ref: './paths/Account.yaml'
